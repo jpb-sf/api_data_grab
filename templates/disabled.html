@@ -1,0 +1,24 @@
+{% extends "ytdata.html" %}
+{% block title %}
+	household
+{% endblock %}
+		{% block article %}
+			<article class="form-wrapper">
+				<!-- Validate form with HTML  -->
+				<form action="/query" method="post" class="form" name="myForm" >
+					<p>It looks like your Javascript is disabled. This application will not run properly without it.</p>
+					<p>Please enable Javascript, and refresh site to access the application's features!<br></p>
+					<br>
+					<br>
+					<a type="button" href="http://127.0.0.1:5000" class="button">Refresh</a>
+				</form>
+			</article>
+		{% endblock %}
+		</main>
+	</div>
+	{% block script %}
+	<script type="text/javascript" src="{{ url_for('static', filename='ytdata_scripts.js') }}"/></script>
+	{% endblock %}
+	
+</body>
+</html>
