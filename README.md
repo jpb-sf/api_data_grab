@@ -1,1 +1,0 @@
-Application utilizes Google's Youtube API to present data on the top populated results (videos) for any Youtube search query. The app initially was all servier oriented and generated a csv file, but a GUI was added with the feature of displaying, and downloading the data (csv) from a browser.
