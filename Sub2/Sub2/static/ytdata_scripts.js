@@ -29,7 +29,7 @@ let download = function()
 		{	
 			// Figure out filename value, if possible.
 			let disposition = xhttp.getResponseHeader('Content-Disposition')
-	
+
 			// Extract file name from response. Content Disposition: attachment; filename=python.csv
 			const matches = /=([^=].+\.csv)/.exec(disposition)
 			// Assign filename as the extracted xhttp.response as long as it is not null. if null or other error, assign generic 'file.csv' // Also removing trailing number for user
@@ -65,25 +65,25 @@ let reset = function()
 // Function returns user to home page. If there is a hidden value, the server will be notified of the file to clear
 let home = function() {
 
-	let hiddenVal = document.querySelector('.hidden_val').value;
-
+	let hiddenVal = document.querySelector('.hidden_val');
 	if (hiddenVal)
-	{	
+	{
+		
 		let xhttp = new XMLHttpRequest();
-		xhttp.open("get", "clear/" + hiddenVal)
+		xhttp.open("get", "clear/" + hiddenVal.value)
 		xhttp.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8')
 		xhttp.onload = function()
 		{	
 			if (xhttp.readyState == 4 && xhttp.status == 200)
 			{
-				window.location = "/"
+				window.location.href = "/"
 			}
 		}
 		xhttp.send(null)
 	}
 	else
 	{
-		window.location = "/"
+		window.location.href = "/"
 	}
 }
 

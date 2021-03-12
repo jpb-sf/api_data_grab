@@ -1,16 +1,16 @@
 {% extends "index.html" %}
 {% block title %}
-	Javascript disabled
+	Error message
 {% endblock %}
 		{% block article %}
 			<article class="form-wrapper">
 				<!-- Validate form with HTML  -->
 				<form action="/query" method="post" class="form" name="myForm" >
-					<p>It looks like your Javascript is disabled. This application will not run properly without it.</p>
-					<p>Please enable Javascript, and refresh site to access the application's features!<br></p>
+					<p>{{ message1 }}</p>
+					<p>{{ message2 }}</p><br>
 					<br>
 					<br>
-					<a type="button" href="http://127.0.0.1:5000" class="button">Refresh</a>
+					<a type="button" href="/" class="button">Search</a>
 				</form>
 			</article>
 		{% endblock %}

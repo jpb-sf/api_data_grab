@@ -154,6 +154,14 @@ input {
 	margin-left: 1rem;
 }
 
+.error__amount {
+	font-style: italic;
+	background-color: #FFFFCC;
+	margin-top: 2rem;
+	width: max-content;
+}
+
+
 .table {
 	border: solid 1px #999;
 	/* muy importante*/

@@ -8,10 +8,11 @@
 			<form action="/validate" method="post" class="form" name="myForm" >
 				<label for="">Enter a search</label>
 				<input id="query" type="text" name="query" class="input-lrg" maxlength="30" minlength="2" required >
-				<label for="">Enter a result number </label>
+				<label for="">Enter the number of results to be returned </label>
 				<input id="amount" type="number" name="amount" class="input-sml" max="10" minlength="1" required>
 				<button type="button" onclick="send()" class="button">Submit</button>
 				<button type="button" onclick="reset()"class="button">Reset</button>
 			</form>
 		</article>
+		<p class="error__amount">{{error}}</p>
 	{% endblock %}
