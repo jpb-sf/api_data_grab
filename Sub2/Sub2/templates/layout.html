@@ -7,35 +7,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='ytdata.css')}}">
 </head>
 <body>
-    <div class="page">
-        <section class="side">
+    <div class="body">
+        <nav class="nav">
             <img class="logo" src="/static/youtube_logo.svg" alt="youtube logo" onclick="home()">
-        </section>
+            <div class="nav__homelink--wrapper">
+                <a href="https://www.jasonbergland.com/projects" class="nav__homelink--link" >
+                    <div>
+                        <hr class="nav__homelink--rule">
+                        <h6 class="nav__homelink--text"> Return to <br> my portfolio</h6>
+                    </div>
+                </a>
+            </div>
+        </nav>
         <main class="main">
             <h3>YouTube Search Engine Data Collector<br>
-            <span class="h3-light">What are the top results for any youtube search? Find out here!</span>
+            <span class="h3-light">What are the top results for any YouTube search? Find out here!</span>
             </h3>
             <hr>
             {% block article %}
-                <article class="form-wrapper">
-                    <!-- Validate form with HTML  -->
-                    <form action="/query" method="get" class="form" name="myForm" >
-                        <label for="">Enter a search</label>
-                        <input id="query" type="text" name="query" class="input-lrg" maxlength="30" minlength="2" required >
-                        <label for="">Enter a result number </label>
-                        <input id="amount" type="number" name="amount" class="input-sml" max="10" minlength="1" required>
-                        <button type="button" onclick="send()" class="button">Submit</button>
-                        <button type="button" onclick="reset()"class="button">Reset</button>
-                    </form>
-                </article>
+
             {% endblock %}
         </main>
     </div>
     {% block script %}
         <script type="text/javascript" src="{{ url_for('static', filename='ytdata_scripts.js') }}"/></script>
-        <!-- <noscript> Handles cirmustance in which Javascript is disabled in client's browser   -->
-        <noscript><meta http-equiv="refresh" content="1;url=/error/js.html"></noscript>
+        <noscript><meta http-equiv="refresh" content="1;url=/error/js.html"></noscript><!-- <noscript> handles cirmustancea where JS is disabled in client's browser -->
     {% endblock %}
-    
 </body>
 </html>
+       

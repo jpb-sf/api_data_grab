@@ -1,9 +1,12 @@
 
+/* html selectors ============= */
 
-/* general */
+html {
+	background: #BBEFFF;
+}
 
-
-div, section, main, h3 {
+html, body {
+	height: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -11,16 +14,13 @@ div, section, main, h3 {
 body {
 	box-sizing: border-box;
 	margin: 0 5rem;
-	background: #BBEFFF;
+	background: white;
 	font-family: sans-serif;
 }
 
-@media screen and (max-width: 1200px)
-{	
-	body {
-		margin: 0 1.5rem;
-		background: white;
-	}
+div, section, main, h3 {
+	margin: 0;
+	padding: 0;
 }
 
 hr {
@@ -34,99 +34,183 @@ hr {
 a {
 	text-decoration: none;
 }
+	/* typography ============= */
 
+	h3 {
+		font-size: 1.5rem;
+		margin: 1rem 0;
+		line-height: 2rem;
+	}
 
-/* typography */
+	h3, label {
+		color: #555;
+	}
 
-h3 {
-	font-size: 1.5rem;
-	margin: 1rem 0;
-	line-height: 2rem;
+	h4 {
+		color: #555;
+	}
+
+	label {
+		font-size: 1.15rem;
+		margin-bottom: .25rem;
+	}
+
+	h3 .h3-light {
+		font-weight: 200;
+	}
+
+	input {
+		font-size: 1rem;
+	}
+
+/* MQ media query html selectors ============= */
+
+@media screen and (max-width: 1200px){	
+	
+	body {
+		margin: 0 1.5rem;
+		background: white;
+	}
+	html {
+		background: white;
+	}
 }
 
-h3, label {
-	color: #555;
+@media screen and (max-width: 500px) {	
+
+	h3 {
+		font-size: 1.1rem;
+		line-height: 1.7rem;
+	}
+	
+	label {
+		font-size: 1rem;
+		margin-bottom: .1rem;
+	}
 }
 
-h4 {
-	color: #555;
-}
+/* postitional ============= */
 
-label {
-	font-size: 1.15rem;
-	margin-bottom: .25rem;
-}
-
-h3 .h3-light {
-	font-weight: 200;
-}
-
-input {
-	font-size: 1rem;
-}
-
-/* postitional */
 .mt-1 {
 	margin-top: 1rem;
 }
 
-/* layout */
-
-.page {
-	display: flex;
+.body {
+	position: relative;
 	width: 100%;
-	height: 100%;
+	margin: 0;
 	background: white;
 }
 
-.side {
+/* nav (layout.html) ============= */
+
+.nav {
+	position: relative;
 	display: flex;
-	justify-content: center;
-	width: 8rem;
-	height: 100%;
+	justify-content: space-between;
+	width: 100%;
+	height: 5rem;
+	top: 2rem;
 }
-	.side > .logo {
-		position: absolute;
-		margin-top: 4rem;
+	.nav > .logo {
+		position: relative;
+		margin: -2rem 0 0 1rem;
 		width: 5rem;
 		cursor: pointer;
 	}
 
-@media screen and (max-width: 700px)
-{	
-		.side > .logo {
-		
-			width: 4rem;
-		}
-}
-@media screen and (max-width: 500px)
-{	
-		.side > .logo {
-		
-			margin-left: 5.5rem;
-		}
-}
-
-.main {
-	margin: 8rem 4rem 0 1rem;
-	height: 100vh;
-	width: 100%;
-	min-width: 20rem;
-}
-
-.form {
-	margin-top: 2rem;
-}
+/* nav__homelink (layout.html) ============= */
 	
-	.form > input, label {
-		display: block;
+.nav__homelink--wrapper {
+	position: relative;
+	margin-top: 0rem;
+	width: 8rem;
+	height: 4rem;
+	z-index: 1;
+}
+	.nav__homelink--link {
+		position: absolute;
+		display: flex;
+		margin: 0rem 0 0 1rem;
+		width: max-content;
+		text-decoration: none;
+	}
+	
+	.nav__homelink--rule {
+		position: absolute;
+		border: 2px solid #BBB;
+		margin: 0rem 0 0 3rem;
+		width: 3rem;
+	}
+	
+	.nav__homelink--text {
+		color: #BBB;
+		margin-left: 1rem;
+		margin-top: .5rem;
+		font-size: .9rem;
+		text-decoration: none;
+		justify-content: right;
+		text-align: right;
 	}
 
+/* main  (layout.html) ============= */
+
+.main {
+	position: relative;
+	margin: 3rem 4rem 0 8rem;
+}
+
+/* MQ media query for nav, homelink, main ============= */
+
+@media screen and (max-width: 700px){	
+		.main {
+			margin: 4rem 2rem 0 2rem;
+		}
+			
+		.nav > .logo {
+			width: 4rem;
+			margin-left: 1.9rem;
+		}
+}
+
+@media screen and (max-width: 500px) {	
+	
+	.main {
+		margin: 1rem 1rem 0 1rem;
+	}
+
+	.nav > .logo {
+		margin-left: .9rem;
+	}
+
+
+	.form > input {
+		margin-bottom: 1rem;
+	}
+}
+
+@media screen and (max-width: 450px) {	
+
+	.main {
+		margin: 1rem 1rem 0 1rem;
+	
+	}
+}
+
+/* form (index.html) ============= */
+.form {
+	margin-top: 1rem;
+}
+	
 	.form > input {
 		border: none;
 		padding: .5rem;
 		background: #E6E7E8;
 		margin-bottom: 2rem;
+	}
+	
+	.form > input, label {
+		display: block;
 	}
 
 	.form > .input-lrg {
@@ -136,7 +220,7 @@ input {
 	.form > .input-sml{
 		width: 4rem;
 	}
-
+/* button located in multiple templates*/
 .button {
 	font-size: 1.25rem;
 	background-color: #777;
@@ -147,6 +231,8 @@ input {
 	margin-right: .5rem;
 	cursor: pointer;
 }
+
+/* error ============= */
 
 .error {
 	font-style: italic;
@@ -161,6 +247,7 @@ input {
 	width: max-content;
 }
 
+/* table (query.html) ============= */
 
 .table {
 	border: solid 1px #999;
@@ -183,7 +270,7 @@ input {
 	.row > td:first-child {
 		text-align: center;
 	}
-	/* LEARN nth-last-child, last three children, as the n starts with 1, all positive values pass*/
+	/* nth-last-child, -n + 3 ---last three children, as the n starts with 1, all positive values pass*/
 	.row > td:nth-last-child(-n+3) {
 		text-align: right;
 	}
@@ -196,7 +283,6 @@ input {
 	border-left: none;
 	border-top: none;
 }
-
 	.head > th {
 		color: #FFFFFF;
 		background-color: red;
@@ -205,7 +291,6 @@ input {
 
 .cell, .cell1, .cell2, .cell3, .cell4., .cell5, .cell6, .cell7, .cell8 {
 		display: table-cell;
-
 	}
 
 .cell {
@@ -224,6 +309,7 @@ input {
 		max-width: 16ch;
 	}
 
+/* MQ media query for form, error, table ============= */
 
 @media screen and (max-width: 1000px){
 	
@@ -236,6 +322,13 @@ input {
 	
 	.cell4, .cell7 {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 500px) {	
+	
+	.form > input {
+		margin-bottom: 1rem;
 	}
 }
 

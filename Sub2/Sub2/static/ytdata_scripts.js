@@ -1,4 +1,4 @@
-
+console.log(window.innerWidth)
 // Function makes a post request sending user form data to server. AJAX eliminates a response that refreshes page
 let send = function()
 {

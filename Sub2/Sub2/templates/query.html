@@ -3,32 +3,29 @@
 	YouTube Search Data Results!
 {% endblock %}
 	{% block article %}
-
 		<h4><i>Query: “{{ header['query'] }}” | On: {{ header['date'] }} PST</i></h4>
 		<table class="table">
-		<tr class="head">
-			{% set list = [1] %}
-			{% for i in columnTitles %}
-				{% set index = list | length %}
-				<th class="cell cell{{ index }}"> {{ i }}  </th>
-				{% set i = list.append(1) %}
-			{% endfor %}
-		</tr>
-		
-		{% for i in collect %}
-			<tr class="row">
-			{% set list2 = [1] %}
-			{% for item in i %}
-				{% set index = list2 | length %}
-				<td class="cell cell{{ index }}"> {{ item }} </td>
-				{% set i = list2.append(1) %}
-			{% endfor %}
+			<tr class="head">
+				{% set list = [1] %}
+				{% for i in columnTitles %}
+					{% set index = list | length %}
+					<th class="cell cell{{ index }}"> {{ i }}  </th>
+					{% set i = list.append(1) %}
+				{% endfor %}
 			</tr>
-		{% endfor %}
-		<input type="hidden" class="hidden_val" value="{{ fileName }}">
-		
+			
+			{% for i in collect %}
+				<tr class="row">
+				{% set list2 = [1] %}
+				{% for item in i %}
+					{% set index = list2 | length %}
+					<td class="cell cell{{ index }}"> {{ item }} </td>
+					{% set i = list2.append(1) %}
+				{% endfor %}
+				</tr>
+			{% endfor %}
+			<input type="hidden" class="hidden_val" value="{{ fileName }}">
 		</table>
-		<button type="button" onclick="home()" class="button mt-1">Search</button>
-		<button type="button" onclick="download()"class="button mt-1">Download</button>
-
+		<button type="button" onclick="home()" class="button">Search</button>
+		<button type="button" onclick="download()"class="button">Download</button>
 	{% endblock %}

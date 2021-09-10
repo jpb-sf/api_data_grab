@@ -29,6 +29,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 def internal_error(error):
     return render_template('index.html')
 
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('index.html')
+
 # Start App
 @app.route('/', methods=['GET'])
 def home():
@@ -68,12 +72,14 @@ def get_file_age(filepath):
 
 # Loops through server's csv directory, and deletes any user-created csv files older than 2 hours (handles any activity where user closes browser window)
 def clear_old_files():
+
     for f in os.listdir(basedir + '/csv/'):
         # If file is older than 2 hours
+        print('age of file is')
+        print(get_file_age(f))
         if get_file_age(f) > 2:
             open_f = open(basedir + '/csv/' + f, 'w')
             os.remove(open_f.name)
-            return "True"
 
 # Support function that makes additional API call for data of (viewCount, likeCount, commentCount)
 def get_stats(videoId):
@@ -130,36 +136,39 @@ def retrieve_query(query, amount):
     file_name = query + file_no + '.csv'
     
     header = {'query': query, 'date': date}
-    
-    with open(basedir + '/csv/' + file_name, 'w+', newline='', encoding="utf-8") as newfile:
-        
-        csv_writer = csv.DictWriter(newfile, fieldnames=fieldnames)
-        csv_writer.writeheader()
-        # Create empty list to gather results
-        collect = [] 
-        # Loop through Google data api list of dictionaries
-        for item in results['items']:
-            # Call function to receive data gathered by query using current videoId
-            stats = get_stats(item['id']['videoId'])
-            # Add query results as a list 
-            collect.append([
-                result_no,
-                item['snippet']['title'],
-                item['snippet']['channelTitle'], 
-                item['id']['videoId'],
-                item['snippet']['publishedAt'],
-                stats['viewCount'], 
-                stats['likeCount'],
-                stats['commentCount']
-                ])
+    try: 
+        with open(basedir + '/csv/' + file_name, 'w+', newline='', encoding="utf-8") as newfile:
+            
+            csv_writer = csv.DictWriter(newfile, fieldnames=fieldnames)
+            csv_writer.writeheader()
+            # Create empty list to gather results
+            collect = [] 
+            # Loop through Google data api list of dictionaries
+            for item in results['items']:
+                # Call function to receive data gathered by query using current videoId
+                stats = get_stats(item['id']['videoId'])
+                # Add query results as a list 
+                collect.append([
+                    result_no,
+                    item['snippet']['title'],
+                    item['snippet']['channelTitle'], 
+                    item['id']['videoId'],
+                    item['snippet']['publishedAt'],
+                    stats['viewCount'], 
+                    stats['likeCount'],
+                    stats['commentCount']
+                    ])
 
-            csv_writer.writerow({'Query': query, 'Date': date, 'Result': result_no, 'Video': item['snippet']['title'],
-                'Channel': item['snippet']['channelTitle'], 'Video Id': item['id']['videoId'], 
-                'Published': item['snippet']['publishedAt'], 'Views':stats['viewCount'], 'Likes': stats['likeCount'], 
-                'Comments': stats['commentCount']})
-            result_no += 1
-    
-    # ## NEED SOME ERROR HANDLING?
+                csv_writer.writerow({'Query': query, 'Date': date, 'Result': result_no, 'Video': item['snippet']['title'],
+                    'Channel': item['snippet']['channelTitle'], 'Video Id': item['id']['videoId'], 
+                    'Published': item['snippet']['publishedAt'], 'Views':stats['viewCount'], 'Likes': stats['likeCount'], 
+                    'Comments': stats['commentCount']})
+                result_no += 1
+    except ValueError as e:
+        print(e)
+        error = "Looks like there was an error. Please enter a result number between 1 and 11."
+        return render_template('index.html', error=error)
+
     # return jsonify({"response": True, "html": html_output})
     column_titles = ["#", "Video Title", "Channel", "Video ID", "Published on", "Views", "Likes", "Comments"]
     return render_template('query.html', header=header, collect=collect, columnTitles=column_titles, fileName = file_name)
