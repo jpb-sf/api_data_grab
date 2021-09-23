@@ -1,5 +1,5 @@
 console.log(window.innerWidth)
-// Function makes a post request sending user form data to server. AJAX eliminates a response that refreshes page
+// Function makes a get request sending user entered data to server.
 let send = function()
 {
 	const query = document.querySelector('#query').value;
@@ -13,7 +13,7 @@ let send = function()
 	}
 }
 
-// Function sends get request to server with filename argument (with unique trailing number hidden in HTML) for server to retrieve, and return to client for download 
+// Function sends get request to server with filename argument (with unique trailing number hidden in HTML) for server to retrieve and return to client for download 
 let download = function()
 {	
 	// Get key val from hidden HTML button to pass to server
@@ -22,19 +22,21 @@ let download = function()
 	const xhttp = new XMLHttpRequest();
 	xhttp.open("get", "/download" + arg);
 
-	xhttp.setRequestHeader('Content-Type', 'text/csv; charset=UTF-8');
 	xhttp.onload = function()
 	{
 		if (xhttp.readyState == 4 && xhttp.status == 200) 
 		{	
-			// Figure out filename value, if possible.
+			// Figure out filename value if possible.
 			let disposition = xhttp.getResponseHeader('Content-Disposition')
 
 			// Extract file name from response. Content Disposition: attachment; filename=python.csv
 			const matches = /=([^=].+\.csv)/.exec(disposition)
-			// Assign filename as the extracted xhttp.response as long as it is not null. if null or other error, assign generic 'file.csv' // Also removing trailing number for user
-			let filename = (matches != null && matches[1] ? matches[1].substr(0, matches[1].length - 7) + ".csv" : 'file.csv')
-
+			// Assign filename as the extracted xhttp.response as long as it's not null. If null or any other error, assign generic 'file.csv' // Also removing trailing number for user
+			let filename = (matches != null ? matches[1].substr(0, matches[1].length - 7) + ".csv" : 'file.csv')
+			console.log('matches is ')
+			console.log(matches)
+			console.log('matches[1] is ')
+			console.log(matches[1])
 			// Download
 			const blob = new Blob([xhttp.response], { type: 'text/csv' })
 			const link = document.createElement('a');
@@ -43,7 +45,6 @@ let download = function()
 			link.download = filename;
 
 			document.body.appendChild(link);
-			//LEARN! 
 			link.click();
 
 			document.body.removeChild(link);
